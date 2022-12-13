@@ -1,25 +1,43 @@
-import logo from './logo.svg';
 import './App.css';
 
+import { useState } from 'react';
+
+import { Form } from './components/Form'
+import { FormView } from './components/FormView'
+
+import { Link, Routes, Route } from "react-router-dom";
+
 function App() {
-  const temp =  <div>{2+3}</div>
+  const [data, setFormData] = useState([])
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>{temp}</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <nav>
+        <Link to="/">Home</Link>
+        <Link to="/form">Form</Link>
+        <Link to="/form/view">Form View</Link>
+      </nav>
+      
+      <main>
+        <Routes>
+          <Route 
+            path='/' 
+            element={<h1>Home Page</h1>} 
+          />
+          
+          <Route 
+            path='/form' 
+            element={<Form saveData={setFormData}/>} 
+          />
+
+          <Route 
+            path='/form/view' 
+            element={<FormView data={data} />} 
+          />
+        </Routes>
+      </main>
     </div>
-  )
+  )  
 }
 
 export default App
